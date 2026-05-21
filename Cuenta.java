@@ -15,7 +15,7 @@ public class Cuenta{
     }
     public Cuenta(){
         this.tipoDeMoneda = "";
-        this.saldo = 0.0;
+        this.saldo = 0.0f;
         this.numeroCuenta = 0;
     }
     //Getters y setters
@@ -58,7 +58,7 @@ public class Cuenta{
         if(this.saldo >= monto){
             this.saldo -= monto;
         } else {
-            throw new illegalArgumentException("Saldo insuficiente para retirar el monto solicitado.");     
+            throw new IllegalArgumentException("Saldo insuficiente para retirar el monto solicitado.");     
         }
     }
 }
