@@ -196,6 +196,22 @@ public class Gestor {
             }
         }
     }
+/**
+     * Muestra el detalle de un cliente particular buscando por su DNI.
+     * @version 1.0
+     * @author Bravo Guadalupe, Suarez Martin
+     */
+    public void mostrarDetalleCliente(int dni) {
+        for (Cliente c : listaClientes) {
+            if (c.getDni() == dni) {
+                System.out.println("DNI: " + c.getDni() + " | Nombre: " + c.getNombre() + 
+                                   " | Tipo: " + c.getTipoCliente() + " | Ingreso: " + 
+                                   c.getAnioIngreso() + " | Estado: " + c.getEstado());
+                return;
+            }
+        }
+        System.out.println("Cliente no encontrado.");
+    }
 
   /**
      * Informe de transacciones filtrado por un mes específico (Ej: "05" para Mayo)

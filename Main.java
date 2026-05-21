@@ -1,7 +1,7 @@
 /**
  * Clase principal de ejecución para comprobar el correcto funcionamiento del ecosistema bancario.
  * @author Bravo Guadalupe, Suarez Martin
- * @version 4.0
+ * @version 5.0
  */
 public class Main {
     public static void main(String[] args) {
@@ -18,7 +18,7 @@ public class Main {
         Cliente c2 = new Cliente(87654321, "Maria Gomez", "PLATINO", 2015, "ACTIVO", 2222, 2223);
         Cliente c3 = new Cliente(11111111, "Pedro Lopez", "PLATA", 2020, "ACTIVO", 3333, 3334);
 
-        // 3. Los agregamos al Gestor (El gestor ya sabe que si están repetidos, no hace nada)
+        // 3. Los agregamos al Gestor 
         gestor.agregarCliente(c1);
         gestor.agregarCliente(c2);
         gestor.agregarCliente(c3);
@@ -50,19 +50,31 @@ public class Main {
         System.out.println("1. LISTADO DE TODOS LOS CLIENTES (Con su estado actual):");
         gestor.listarClientes();
 
-        System.out.println("\n2. SALDOS DE CUENTAS (Ejemplos):");
+        // NUEVO: Probar detalle de cliente específico
+        System.out.println("\n2. DETALLE DE UN CLIENTE ESPECÍFICO (Por DNI):");
+        gestor.mostrarDetalleCliente(87654321); // Vemos el detalle de Maria
+
+        System.out.println("\n3. SALDOS DE CUENTAS (Ejemplos):");
         System.out.print("Saldo Juan Perez -> ");
         c1.mostrarCuenta("pesos");
         System.out.print("Saldo Maria Gomez -> ");
         c2.mostrarCuenta("dolares");
 
-        System.out.println("\n3. TODAS LAS TRANSACCIONES DEL SISTEMA:");
+        System.out.println("\n4. TODAS LAS TRANSACCIONES DEL SISTEMA:");
         gestor.informeTodasLasTransacciones();
 
-        System.out.println("\n4. TRANSACCIONES FILTRADAS (Solo de Juan Perez):");
+        System.out.println("\n5. TRANSACCIONES FILTRADAS (Solo de Juan Perez):");
         gestor.listarTransaccionesPorCliente(12345678);
 
-        // 7. Guardar los datos en el TXT
+        // NUEVO: Filtrar transacciones por mes (Asumiendo mes 05 por tus pruebas)
+        System.out.println("\n6. TRANSACCIONES FILTRADAS (Por Mes - Ej: 05):");
+        gestor.informeTransaccionesPorMes("05");
+
+        // NUEVO: Filtrar transacciones por año (Asumiendo 2026 por tus pruebas)
+        System.out.println("\n7. TRANSACCIONES FILTRADAS (Por Año - Ej: 2026):");
+        gestor.informeTransaccionesPorAnio("2026");
+
+        // 8. Guardar los datos en el TXT
         System.out.println("\n--- PERSISTENCIA DE DATOS ---");
         gestor.guardarDatos();
         System.out.println("¡Datos guardados con éxito en clientes.txt y transacciones.txt!");
