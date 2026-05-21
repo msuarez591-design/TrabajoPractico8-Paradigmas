@@ -25,20 +25,29 @@ public class Gestor {
         this.archTransaccion = archTransaccion;
     }
 
-    public Gestor(){
-        this.listaClientes = new ArrayList<>();
-        this.listaTransacciones = new ArrayList<>();
+ public Gestor(){
         this.archCliente = new ArchivoCliente();
         this.archTransaccion = new ArchivoTransacciones();
+        
+        this.listaClientes = this.archCliente.leerClientes();
+        this.listaTransacciones = this.archTransaccion.leerTransacciones();
     }
 
-    /**
-     * Metodo para agregar un cliente a la lista de clientes
-     * @version 1.0
+/**
+     * Metodo para agregar un cliente a la lista verificando que no exista un duplicado
+     * @version 2.0
      * @author Bravo Guadalupe, Suarez Martin
      */
     public void agregarCliente(Cliente cliente){
-        this.listaClientes.add(cliente);
+        // Primero buscamos si el cliente ya existe en nuestra lista
+        Cliente existente = buscarClientePorDni(cliente.getDni());
+        
+        // Si nos da null, significa que no existe, entonces lo agregamos sin problema
+        if (existente == null) {
+            this.listaClientes.add(cliente);
+        } else {
+            // Si ya existe (porque lo leímos del txt), simplemente no hacemos nada
+            System.out.println("Aviso: El cliente con DNI " + cliente.getDni() + " ya estaba cargado. No se duplicará.");        }
     }
 
     /**
@@ -188,17 +197,20 @@ public class Gestor {
         }
     }
 
-    /**
+  /**
      * Informe de transacciones filtrado por un mes específico (Ej: "05" para Mayo)
-     * Asume formato de fecha "YYYY-MM-DD"
-     * @version 1.0
+     * @version 2.0
      * @author Bravo Guadalupe, Suarez Martin   
      */
     public void informeTransaccionesPorMes(String mes) {
         System.out.println("--- Transacciones del Mes: " + mes + " ---");
+        
+        // Le agregamos guiones para que busque exactamente el mes. Ej: "-05-"
+        String mesBuscado = "-" + mes + "-"; 
+
         for (Transacciones t : listaTransacciones) {
-            String[] partesFecha = t.getFecha().split("-");
-            if (partesFecha.length >= 2 && partesFecha[1].equals(mes)) {
+            // Si la fecha de la transacción contiene "-05-", la mostramos
+            if (t.getFecha().contains(mesBuscado)) {
                 System.out.println(t.getFecha() + " | " + t.getTipo() + " | $" + t.getMonto());
             }
         }
