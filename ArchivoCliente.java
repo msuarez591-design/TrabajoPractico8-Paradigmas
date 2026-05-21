@@ -28,9 +28,22 @@ public class ArchivoCliente{
         }
         this.archivoClient = archivoClient;
     }
-    /**
-     * Carga de datos de clientes al archivo
+
+        /**
+     * Carga de datos de clientes al archivo 
      * @version 1.0
      * @author Bravo Guadalupe, Suarez Martin
      */
+
+    public void guardarClientes(ArrayList<Cliente> listaClientes) {
+        try (FileWriter writer = new FileWriter(this.archivoClient)) {
+            for (Cliente cliente : listaClientes) {
+                writer.write(cliente.getDni() + "," + cliente.getNombre() + "," + cliente.getTipoCliente() + "," + cliente.getAnioIngreso() + "," + cliente.getEstado() + "," + cliente.getTipoDeMoneda() + "," + cliente.getSaldo() + "," + cliente.getNumeroCuenta() + "\n");
+            }
+        } catch (IOException e) {
+            System.err.println("Error al guardar los clientes: " + e.getMessage());
+        }
+    }
+
+
 }

@@ -1,4 +1,7 @@
 import java.io.File;
+import java.util.ArrayList;
+import java.file.IOException;
+import java.io.FileWriter;
 
 public class ArchivoTransacciones{
     //Atributo
@@ -28,9 +31,18 @@ public class ArchivoTransacciones{
         }
         this.archivoTransac = archivoTransac;
     }
-    /**
+      /**
      * Carga de datos de transacciones al archivo
      * @version 1.0
      * @author Bravo Guadalupe, Suarez Martin
      */
+    public void guardarTransacciones(ArrayList<Transacciones> listaTransacciones) {
+        try (FileWriter writer = new FileWriter(this.archivoTransac)) {
+            for (Transacciones transaccion : listaTransacciones) {
+                writer.write(transaccion.getFecha() + "," + transaccion.getTipo() + "," + transaccion.getNumeroDeCuenta() + "," + transaccion.getMonto() + "," + transaccion.getDniPersona() + "\n");
+            }
+        } catch (IOException e) {
+            System.err.println("Error al guardar las transacciones: " + e.getMessage());
+        }
+  
 }
