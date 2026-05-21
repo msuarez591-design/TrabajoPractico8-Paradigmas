@@ -1,8 +1,12 @@
-public class Transacciones{
+/**
+ * Representa una transacción bancaria (Depósito o Extracción).
+ * * @author Bravo Guadalupe, Suarez Martin
+ * @version 1.0
+ */
+public class Transacciones {
     //Atributos
     private String fecha;
     private String tipo;
-    private String tipo; // "DEPOSITO" o "EXTRACCION"
     private Integer numeroCuenta;
     private double monto;
     private Integer dniPersona;
@@ -15,54 +19,65 @@ public class Transacciones{
     public Transacciones(String fecha, String tipo, Integer numeroDeCuenta, double monto, Integer dniPersona){
         if (!tipo.equals("DEPOSITO") && !tipo.equals("EXTRACCION")) {
             throw new IllegalArgumentException("El tipo de transacción debe ser 'DEPOSITO' o 'EXTRACCION'.");
-        }else if (monto <= 0) {
+        } else if (monto <= 0) {
             throw new IllegalArgumentException("El monto de la transacción debe ser positivo.");
-        }else if (numeroDeCuenta <= 0) {
+        } else if (numeroDeCuenta <= 0) {
             throw new IllegalArgumentException("El número de cuenta debe ser un entero positivo.");
-        }else if (dniPersona <= 0) {
+        } else if (dniPersona <= 0) {
             throw new IllegalArgumentException("El DNI de la persona debe ser un entero positivo.");
         }
         this.fecha = fecha;
         this.tipo = tipo;
-        this.numeroDeCuenta = numeroDeCuenta;
+        this.numeroCuenta = numeroDeCuenta;
         this.monto = monto;
         this.dniPersona = dniPersona;
     }
+
     public Transacciones(){
         this.fecha = "";
         this.tipo = "";
-        this.numeroDeCuenta = 0;
+        this.numeroCuenta = 0;
         this.monto = 0.0;
         this.dniPersona = 0;
     }
+
     //Getters y setters
     public String getFecha(){
         return this.fecha;
     }
+
     public void setFecha(String fecha){
         this.fecha = fecha;
     }
+
     public String getTipo(){
         return this.tipo;
     }
+
     public void setTipo(String tipo){
         this.tipo = tipo;
     }
+
     public Integer getNumeroDeCuenta(){
-        return this.numeroDeCuenta;
+        return this.numeroCuenta;
     }
+
     public void setNumeroDeCuenta(Integer numeroDeCuenta){
-        this.numeroDeCuenta = numeroDeCuenta;
+        this.numeroCuenta = numeroDeCuenta;
     }
+
     public double getMonto(){
         return this.monto;
     }
+
     public void setMonto(double monto){
         this.monto = monto;
     }
+
     public Integer getDniPersona(){
         return this.dniPersona;
     }
+
     public void setDniPersona(Integer dniPersona){
         this.dniPersona = dniPersona;
     }

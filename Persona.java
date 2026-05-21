@@ -1,7 +1,8 @@
-
 /**
  * Representa una persona del sistema bancario.
  * Contiene datos básicos compartidos por clientes y empleados.
+ * * @author Bravo Guadalupe, Suarez Martin
+ * @version 2.0
  */
 public class Persona {
 
@@ -13,36 +14,22 @@ public class Persona {
 
     /**
      * Constructor de Persona
-     * @throws IllegalArgumentException si el dni es negativo, el nombre es nulo
-     * o vacío, el saldo es negativo, o el tipo de moneda es nuloo vacio
-     * @version 1.0
+     * @throws IllegalArgumentException si el dni es negativo o cero, el nombre es nulo o vacío
+     * @version 2.0
      * @author Bravo Guadalupe, Suarez Martin
      */
-    public Persona(int dni, String nombre, String tipoDeMoneda, Float saldo, int numeroCuenta) {
+    public Persona(int dni, String nombre, int numCtaPesos, int numCtaDolares) {
         if (dni <= 0) {
             throw new IllegalArgumentException("El DNI debe ser un número positivo.");
         }
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new IllegalArgumentException("El nombre no puede estar vacío.");
         }
-        if (saldo < 0) {
-            throw new IllegalArgumentException("El saldo no puede ser negativo.");
-        }
-        if (tipoDeMoneda == null || tipoDeMoneda.trim().isEmpty()) {
-            throw new IllegalArgumentException("El tipo de moneda no puede estar vacío.");
-        }
-        if (!tipoDeMoneda.equalsIgnoreCase("pesos") && !tipoDeMoneda.equalsIgnoreCase("dolares")) {
-            throw new IllegalArgumentException("El tipo de moneda debe ser 'pesos' o 'dolares'.");
-        }
         this.dni = dni;
         this.nombre = nombre;
-        if (tipoDeMoneda.equalsIgnoreCase("pesos")) {
-            this.cuentaPesos = new Cuenta(tipoDeMoneda, saldo, numeroCuenta);
-            this.cuentaDolares = new Cuenta("dolares", 0.0f, numeroCuenta);
-        } else {
-            this.cuentaDolares = new Cuenta(tipoDeMoneda, saldo, numeroCuenta);
-            this.cuentaPesos = new Cuenta("pesos", 0.0f, numeroCuenta);
-        }
+        // Toda persona nace con sus dos cuentas asignadas automáticamente
+        this.cuentaPesos = new Cuenta("pesos", 0.0f, numCtaPesos);
+        this.cuentaDolares = new Cuenta("dolares", 0.0f, numCtaDolares);
     }
 
     public Persona() {
@@ -71,8 +58,7 @@ public class Persona {
 
     /**
      * Setters
-     * @throws IllegalArgumentException si el dni es negativo o el nombre es
-     * nulo o vacío
+     * @throws IllegalArgumentException si el dni es negativo o el nombre es nulo o vacío
      */
     public void setNombre(String nombre) {
         if (nombre == null || nombre.trim().isEmpty()) {
@@ -82,7 +68,7 @@ public class Persona {
     }
 
     public void setDni(int dni) {
-        if (dni < 0) {
+        if (dni <= 0) {
             throw new IllegalArgumentException("El dni debe ser un numero positivo.");
         }
         this.dni = dni;
@@ -103,7 +89,7 @@ public class Persona {
      * @version 2.0
      * @author Bravo Guadalupe, Suarez Martin
      */
-    public void getCuenta(String tipoDeMoneda) {
+    public void mostrarCuenta(String tipoDeMoneda) {
         if (tipoDeMoneda == null || tipoDeMoneda.trim().isEmpty()) {
             throw new IllegalArgumentException("El tipo de moneda no puede estar vacío.");
         }

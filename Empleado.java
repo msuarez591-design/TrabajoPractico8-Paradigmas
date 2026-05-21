@@ -1,6 +1,7 @@
-
 /**
  * Representa un empleado del banco.
+ * * @author Bravo Guadalupe, Suarez Martin
+ * @version 2.0
  */
 public class Empleado extends Persona {
 
@@ -10,15 +11,20 @@ public class Empleado extends Persona {
     /**
      * Constructor de Empleado
      * @throws IllegalArgumentException si el cargo es null o vacio
-     * @version 1.0
+     * @version 2.0
      * @author Bravo Guadalupe, Suarez Martin
      */
-    public Empleado(Integer dni, String nombre, Float saldo, int numeroCuenta, String cargo, String tipoDeMoneda) {
-        super(dni, nombre, tipoDeMoneda, saldo, numeroCuenta);
+    public Empleado(int dni, String nombre, String cargo, int numCtaPesos, int numCtaDolares) {
+        super(dni, nombre, numCtaPesos, numCtaDolares);
         if (cargo == null || cargo.trim().isEmpty()) {
             throw new IllegalArgumentException("El cargo no puede estar vacio.");
         }
         this.cargo = cargo;
+    }
+
+    public Empleado() {
+        super();
+        this.cargo = "";
     }
 
     //Getters y setters
